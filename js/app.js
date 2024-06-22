@@ -1,5 +1,7 @@
 let buffer = "0"
+let history = "";
 const screen = document.querySelector(".screen");
+const screenHistory = document.querySelector(".screen-history");
 let runningTotal = 0;
 let previousOperator;
 function buttonClick(value){
@@ -33,7 +35,7 @@ function handleMath(value){
   }
 
   previousOperator = value;
-
+  history += buffer + " " + value + " ";
   buffer = "0";
 }
 function flushOperation(intBuffer){
@@ -43,7 +45,7 @@ function flushOperation(intBuffer){
   else if(previousOperator === "-"){
     runningTotal -= intBuffer;
   }
-  else if(previousOperator === "⤫"){
+  else if(previousOperator === "×"){
     runningTotal *= intBuffer;
   }
   else {
@@ -54,6 +56,7 @@ function handleSymbol(value) {
   switch (value) {
     case "C":
       buffer = "0";
+      history = "";
       runningTotal = 0;
       break;
     case "=":
@@ -62,8 +65,11 @@ function handleSymbol(value) {
         return;
       }
       flushOperation(parseInt(buffer));
+      history += buffer + " = " + runningTotal;
       previousOperator = null;
+      // history += buffer + ""
       buffer = +runningTotal;
+      // history += "" + buffer;
       runningTotal = 0;
       break;
     case "←":
@@ -75,14 +81,15 @@ function handleSymbol(value) {
       break;
     case "+":
     case "-":
-    case "⤫":
-    case "%":
+    case "×":
+    case "÷":
       handleMath(value);
       break;
   }
 }
 function rerender() {
   screen.innerText = buffer;
+  screenHistory.innerText = history;
 }
 function init() {
   document

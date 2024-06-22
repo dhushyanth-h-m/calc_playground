@@ -248,45 +248,77 @@ textarea {
 
 * {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+  background-color: #f0f0f0;
 }
 
 .calculator {
   width: 400px;
-  background-color: black;
+  background-color: #22252d;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  overflow: hidden;
+}
+
+.screen-box {
+  background-color: #292d36;
+  padding: 20px;
+  text-align: right;
   color: white;
 }
 
-.screen{
-  color: white;
+.screen {
+  height: 60px; /* Fixed height */
   font-size: 40px;
-  font-family: "Courier New", Courier, monospace;
-  text-align: right;
-  padding: 20px 5px;
+  font-weight: 700;
+  margin-top: 10px;
+  overflow: hidden; /* Hide overflow if content is too long */
+  white-space: nowrap; /* Prevent wrapping */
+  text-overflow: ellipsis; /* Add ellipsis if content overflows */
+}
+
+.screen-history {
+  height: 30px; /* Fixed height */
+  font-size: 20px;
+  color: #888;
+  min-height: 30px;
+  overflow: hidden; /* Hide overflow if content is too long */
+  white-space: nowrap; /* Prevent wrapping */
+  text-overflow: ellipsis; /* Add ellipsis if content overflows */
+}
+
+.calc-button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5%;
 }
 
 .calc-button {
-  background-color: #d8d9db;
-  color: black;
+  background-color: #292d36;
+  color: white;
   height: 100px;
   width: 24.5%;
   border: none;
-  border-right: 0;
-  font-size: 40px;
+  border-radius: 10px;
+  font-size: 30px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
 }
 
 .calc-button:hover {
-  background-color: #ebebeb;
+  background-color: #30333d;
 }
 
-
 .calc-button:active {
-  background-color: #bbbcbe;
+  transform: scale(0.95);
 }
 
 .double {
@@ -298,25 +330,25 @@ body {
 }
 
 .calc-button:last-child {
-  background-color: #df974c;
+  background-color: #ff9e0b;
   color: white;
 }
 
 .calc-button:last-child:hover {
-  background-color: #dfb07e;
+  background-color: #ffb340;
 }
 
 .calc-button:last-child:active {
-  background-color: #dd8d37;
-}
-
-.calc-button-row {
-  display: flex;
-  align-content: stretch;
-  justify-content: space-between;
-  margin-bottom: 0.5%;
+  background-color: #e08c0b;
 }
 
 .calc-button-row:last-child {
-  padding-bottom: 0;
+  padding-bottom: 0.5%;
+}
+
+@media (max-width: 420px) {
+  .calculator {
+    width: 100%;
+    border-radius: 0;
+  }
 }
